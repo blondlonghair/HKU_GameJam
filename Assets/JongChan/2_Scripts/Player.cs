@@ -2,29 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace JongChan
 {
-    [SerializeField] private float moveSpeed;
-
-    private CharacterController _controller;
-    private Vector3 _moveDir = Vector3.zero;
-
-    void Start()
+    public class Player : MonoBehaviour
     {
-        TryGetComponent(out _controller);
-    }
+        [SerializeField] private float moveSpeed;
 
-    void Update()
-    {
-        if (_controller.isGrounded)
+        private CharacterController _controller;
+        private Vector3 _moveDir = Vector3.zero;
+
+        void Start()
         {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
-
-            _moveDir = new Vector3(h, 0, v).normalized;
+            TryGetComponent(out _controller);
         }
 
-        _moveDir.y -= 10 * Time.deltaTime;
-        _controller.Move(_moveDir * Time.deltaTime * moveSpeed);
+        void Update()
+        {
+            if (_controller.isGrounded)
+            {
+                float h = Input.GetAxisRaw("Horizontal");
+                float v = Input.GetAxisRaw("Vertical");
+            
+                _moveDir = new Vector3(h, 0, v).normalized;
+            }
+            
+            _moveDir.y -= 10 * Time.deltaTime;
+            
+            if (Input.anyKey)
+            {
+                _controller.Move(_moveDir * Time.deltaTime * moveSpeed);
+            }
+        }
+
+        public void PlayerMove(Transform targetPos)
+        {
+            _controller.Move(targetPos.position - transform.position);
+        }
     }
 }
