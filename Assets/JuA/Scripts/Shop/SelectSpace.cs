@@ -11,6 +11,7 @@ public class SelectSpace : MonoBehaviour
     public bool IsCheck { get { return isCheck; } }
     private Image image;
     private TextMeshProUGUI Name;
+    private TextMeshProUGUI price;
     private TooltipContent content;
     private Button button;
     private ShopItem item;
@@ -19,21 +20,44 @@ public class SelectSpace : MonoBehaviour
     {
         isCheck = false;
         image = gameObject.transform.Find("Content Image").GetComponent<Image>();
-        Name = GetComponentInChildren<TextMeshProUGUI>();
+        Name = gameObject.transform.Find("Content Name").GetComponent<TextMeshProUGUI>();
+        price = gameObject.transform.Find("Price").GetComponent<TextMeshProUGUI>();
         content = GetComponentInChildren<TooltipContent>();
         button = GetComponentInChildren<Button>();
         button.onClick.AddListener(() => Check());
 
-        Set(ShopItemFactory.GetItem(1, 4));
+        RandomSet();
     }
 
-    void Set(ShopItem shop)
+    public void Buy()
+    {
+        if (GameManager.Instance.GetShipStats().Gold < item.price) return;
+        GameManager.Instance.GetShipStats().Gold -= item.price;
+        item.UseAbility();
+        button.GetComponent<Animator>().Play("Out");
+        isCheck = false;
+        RandomSet();
+    }
+
+    public int GetPrice()
+    {
+        return item.price;
+    }
+
+    public void RandomSet()
+    {
+        Set(ShopItemFactory.GetRandomItem());
+    }
+
+    private void Set(ShopItem shop)
     {
         item = shop;
         Name.text = item.NameText;
+        price.text = item.price.ToString();
         content.description = item.contentText;
         image.sprite = item.sprite;
     }
+
 
     private void Check()
     {

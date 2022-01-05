@@ -8,17 +8,17 @@ using DG.Tweening;
 public class UIManager : Singleton<UIManager>
 {
     private GameObject NotificationPrefab;
-    private GameObject Notis;
+    private GameObject Canvas;
 
     private void Awake()
     {
         NotificationPrefab = Resources.Load<GameObject>("Prefabs/Notification");
-        Notis = GameObject.Find("Notis");
+        Canvas = GameObject.Find("Canvas");
     }
 
-    public void ShowNotification(string title, string content, float time, float wait = 1f)
+    public void ShowNotification(string title, string content, float time, float wait = 0.5f)
     {
-        var ob = Instantiate(NotificationPrefab, Notis.transform);
+        var ob = Instantiate(NotificationPrefab, Canvas.transform);
         NotificationManager n = ob.GetComponent<NotificationManager>();
         n.title = title;
         n.description = content;
@@ -41,19 +41,5 @@ public class UIManager : Singleton<UIManager>
         Notification.Remove(n.GetComponent<RectTransform>());
         yield return new WaitForSeconds(2f);
         Destroy(n.gameObject);
-    }
-
-    private void Start()
-    {
-        StartCoroutine(test());
-    }
-
-    IEnumerator test()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1);
-            ShowNotification("asdfasdf", "asdfasdfasdf", 3f);
-        }
     }
 }

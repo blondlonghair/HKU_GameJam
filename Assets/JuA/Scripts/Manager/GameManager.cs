@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private ShipStats shipStats;
+    private ShipStats shipStats = new ShipStats();
 
-    void Start()
+    void Awake()
     {
         Set();
     }
@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     {
         shipStats.MaxHp = 300f;
         shipStats.Hp = shipStats.MaxHp;
-        shipStats.Gold = 20;
+        shipStats.Gold = 100;
         shipStats.NatureRecovery = 0.2f;
     }
 
