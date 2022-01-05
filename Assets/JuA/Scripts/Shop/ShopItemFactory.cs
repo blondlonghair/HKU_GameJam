@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ShopItemFactory
 {
+    static int maxIndex = 2;
+    static int minValue = 1;
+    static int maxValue = 5;
+
     public static ShopItem GetItem(int index, int value)
     {
         switch(index)
@@ -13,6 +17,13 @@ public class ShopItemFactory
             //case 3: return new RepairHammer(value);
             default: return new ConstructionMaterials(value);
         }
+    }
+
+    public static ShopItem GetRandomItem()
+    {
+        int index = Random.Range(1, maxIndex + 1);
+        int value = Random.Range(minValue, maxValue + 1);
+        return GetItem(index, value);
     }
 
     public static int GetSalePrice(int price, int value)

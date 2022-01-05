@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         if (targetToDis > 2)
         {
             state = State.Run;
-            anim.SetTrigger("Run");
+            //anim.SetTrigger("Run");
         }
     }
 
@@ -72,12 +72,12 @@ public class Enemy : MonoBehaviour
         if (targetToDis <= 2)
         {
             state = State.Attack;
-            anim.SetTrigger("Attack");
+            //anim.SetTrigger("Attack");
         }
         else if (targetToDis > 15)
         {
             state = State.Idle;
-            anim.SetTrigger("Idle");
+            //anim.SetTrigger("Idle");
         }
     }
 
@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         if (targetToDis < 15)
         {
             state = State.Run;
-            anim.SetTrigger("Run");
+            //anim.SetTrigger("Run");
         }
     }
 
