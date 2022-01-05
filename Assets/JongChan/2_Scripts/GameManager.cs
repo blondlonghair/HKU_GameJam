@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace JongChan
 {
-    public class GameManager : SingletonMonoCreateDestroy<GameManager>
+    public class GameManager : SingletonMonoDestroy<GameManager>
     {
-        public List<FixStuff> FixStuffs = new List<FixStuff>();
+        public List<Stuff> FixStuffs = new List<Stuff>();
         public List<Portal> Portals = new List<Portal>();
+        public List<Enemy> Enemies = new List<Enemy>();
 
         public event Action<float> FixAction;
 
@@ -25,9 +26,11 @@ namespace JongChan
 
         private void Start()
         {
-            FixStuffs.AddRange(FindObjectsOfType<FixStuff>());
-            FixStuffs.ForEach(x => x.gameObject.SetActive(false));
+            FixStuffs.AddRange(FindObjectsOfType<Stuff>());
             Portals.AddRange(FindObjectsOfType<Portal>());
+
+            // FixStuffs.ForEach(x => x.gameObject.SetActive(false));
+            
             GameObject.FindGameObjectWithTag("Player").TryGetComponent(out _player);
         }
 
@@ -43,7 +46,14 @@ namespace JongChan
                     
                     if (Input.GetKeyDown(KeyCode.F))
                     {
-                        fixStuff.UseStuff();
+                        if (fixStuff.IsBroken)
+                        {
+                            fixStuff.Fix();
+                        }
+                        else
+                        {
+                            fixStuff.Use();
+                        }
                     }
                 }
 
@@ -69,6 +79,17 @@ namespace JongChan
                 else
                 {
                     portal.FKeyOn(false);
+                }
+            }
+
+            foreach (var enemy in Enemies)
+            {
+                if (Vector3.Distance(enemy.transform.position, _player.transform.position) < 5)
+                {
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        //적 공격
+                    }
                 }
             }
         }

@@ -1,35 +1,34 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using TMPro;
 
 namespace JongChan
 {
-    public class Portal : Stuff
+    public class Portal : MonoBehaviour
     {
         public enum Direction
         {
             None,
             Room1,
             Room2,
-            MainRoom
+            MainRoom1,
+            MainRoom2
         }
 
         [SerializeField] private Direction _thisDirection;
+        [SerializeField] private Direction _targetDirection;
+        [SerializeField] private TextMeshPro _fKey;
 
-        public Direction ThisDirection
+        public Direction ThisDirection => _thisDirection;
+        public Direction TargetDirection => _targetDirection;
+
+
+        public void FKeyOn(bool isNear)
         {
-            get => _thisDirection;
-            set => _thisDirection = value;
+            _fKey.gameObject.SetActive(isNear);
         }
         
-        [SerializeField] private Direction _targetDirection;
-
-        public Direction TargetDirection
-        {
-            get => _targetDirection;
-            set => _targetDirection = value;
-        }
-
         public void Use(Player player, Portal targetPortal)
         {
             player.PlayerMove(targetPortal.transform);

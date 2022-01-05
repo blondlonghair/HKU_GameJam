@@ -7,13 +7,22 @@ namespace JongChan
     public class Player : MonoBehaviour
     {
         [SerializeField] private float moveSpeed;
+        [SerializeField] private SpriteRenderer renderer;
 
+        [SerializeField] private float curHp;
+        [SerializeField] private float maxHp;
+        
+        private Animator _animator;
         private CharacterController _controller;
         private Vector3 _moveDir = Vector3.zero;
+
+        public float CurHp { get => curHp; set => curHp = value; }
+        public float MaxHp { get => maxHp; set => maxHp = value; }
 
         void Start()
         {
             TryGetComponent(out _controller);
+            renderer.TryGetComponent(out _animator);
         }
 
         void Update()
@@ -27,16 +36,57 @@ namespace JongChan
             }
             
             _moveDir.y -= 10 * Time.deltaTime;
+            _controller.Move(_moveDir * Time.deltaTime * moveSpeed);
             
-            if (Input.anyKey)
+            UpdateAnim();
+        }
+
+        private void UpdateAnim()
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                _controller.Move(_moveDir * Time.deltaTime * moveSpeed);
+                _animator.SetBool("Move", true);
+
+                if (Input.GetAxisRaw("Horizontal") < 0)
+                {
+                    renderer.flipX = true;
+                }
+                else if (Input.GetAxisRaw("Horizontal") > 0)
+                {
+                    renderer.flipX = false;
+                }
+            }
+
+            else
+            {
+                _animator.SetBool("Move", false);
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _animator.SetTrigger("Attack");
+            }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                _animator.SetTrigger("Fix");
             }
         }
 
         public void PlayerMove(Transform targetPos)
         {
             _controller.Move(targetPos.position - transform.position);
+        }
+
+        public void UpgradeAttack(float value)
+        {
+            maxHp += value;
+            curHp += value;
+        }
+
+        public void UpgradeSpeed(float value)
+        {
+            moveSpeed += value;
         }
     }
 }
