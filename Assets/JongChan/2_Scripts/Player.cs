@@ -9,8 +9,9 @@ namespace JongChan
         [SerializeField] private float moveSpeed;
         [SerializeField] private SpriteRenderer renderer;
 
-        [SerializeField] private float curHp;
-        [SerializeField] private float maxHp;
+        [SerializeField] private float curHp = 100;
+        [SerializeField] private float maxHp = 100;
+        [SerializeField] private float damage = 40;
         
         private Animator _animator;
         private CharacterController _controller;
@@ -18,6 +19,7 @@ namespace JongChan
 
         public float CurHp { get => curHp; set => curHp = value; }
         public float MaxHp { get => maxHp; set => maxHp = value; }
+        public float Damage { get => damage; set => damage = value; }
 
         void Start()
         {

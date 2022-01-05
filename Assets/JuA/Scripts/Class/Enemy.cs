@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,6 +7,9 @@ public class Enemy : MonoBehaviour
     Transform target; //이동 목표
     NavMeshAgent agent; //ai
     Animator anim;
+
+    public float curHp = 100;
+    public float maxHp = 100;
 
     enum State
     {
@@ -20,6 +24,9 @@ public class Enemy : MonoBehaviour
         state = State.Idle;
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        
+        
+        JongChan.GameManager.Instance.Enemies.Add(this);
     }
 
     float targetToDis;
@@ -44,8 +51,10 @@ public class Enemy : MonoBehaviour
 
     private void UpdateAttack()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-            Destroy(this.gameObject);
+        // if (Input.GetKeyDown(KeyCode.F)) Destroy(this.gameObject);
+        
+        if (curHp <= 0)
+            Destroy(gameObject);
 
         agent.speed = 0;
         if (targetToDis > 2)
@@ -81,5 +90,10 @@ public class Enemy : MonoBehaviour
             state = State.Run;
             anim.SetTrigger("Run");
         }
+    }
+
+    private void OnDisable()
+    {
+        JongChan.GameManager.Instance.Enemies.Remove(this);
     }
 }

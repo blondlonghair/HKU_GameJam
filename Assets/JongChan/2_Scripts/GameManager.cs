@@ -88,6 +88,7 @@ namespace JongChan
                 {
                     if (Input.GetKeyDown(KeyCode.F))
                     {
+                        enemy.curHp -= _player.Damage;
                         //적 공격
                     }
                 }
