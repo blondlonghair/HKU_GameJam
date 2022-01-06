@@ -18,27 +18,6 @@ public abstract class ShopItem
     protected abstract void Ability();
 }
 
-//public class FireProtection : ShopItem
-//{
-//    int chance;
-
-//    public FireProtection(int value)
-//    {
-//        this.value = value;
-//        price = ShopItemFactory.GetSalePrice(10, value);
-//        chance = value * 10;
-
-//        contentText = "Reduces fire chance by " + chance.ToString() + "%";
-//        NameText = "Fire Protection " + Utils.GetRomanNumber(value);
-//        //sprite = sprite;
-//    }
-
-//    protected override void Ability()
-//    {
-//        //value 만큼 화재 발생률 낮추기
-//    }
-//}
-
 public class ConstructionMaterials : ShopItem
 {
     int plusMaxHp;
@@ -51,12 +30,13 @@ public class ConstructionMaterials : ShopItem
 
         contentText = "Increase the ship's physical strength by " + plusMaxHp.ToString() + " points.";
         NameText = "Construction Materials " + Utils.GetRomanNumber(value);
-        //sprite = sprite;
+        sprite = Resources.Load<Sprite>("Sprites/ShipHp");
     }
 
     protected override void Ability()
     {
-        GameManager.Instance.GetShipStats().MaxHp += plusMaxHp; //value * 10만큼 함선의 MaxHp 증가
+        GameManager.Instance.GetShipStats().MaxHp += plusMaxHp; //value * 10만큼 함선의 MaxCurHp 증가
+        GameManager.Instance.GetShipStats().Hp += plusMaxHp;
     }
 }
 
@@ -72,11 +52,96 @@ public class RepairHammer : ShopItem
 
         contentText = "It restores the ship's physical strength by " + plusHp.ToString() + " points.";
         NameText = "Repair Hammer " + Utils.GetRomanNumber(value);
-        //sprite = sprite;
+        sprite = Resources.Load<Sprite>("Sprites/ShipHp");
     }
 
     protected override void Ability()
     {
         GameManager.Instance.GetShipStats().Hp += plusHp;
+    }
+}
+
+
+public class IncreaseDamage : ShopItem
+{
+    int plusDamage;
+
+    public IncreaseDamage(int value)
+    {
+        this.value = value;
+        price = ShopItemFactory.GetSalePrice(15, value);
+        plusDamage = value * 5;
+
+        contentText = "Increases the player's attack power by " + plusDamage.ToString() + " points.";
+        NameText = "Increase Damage " + Utils.GetRomanNumber(value);
+        sprite = Resources.Load<Sprite>("Sprites/IncreaseDamage");
+    }
+
+    protected override void Ability()
+    {
+        GameObject.Find("Player").GetComponent<JongChan.Player>().Damage += plusDamage;
+    }
+}
+
+public class IncreaseCurHp : ShopItem
+{
+    int plusCurHp;
+
+    public IncreaseCurHp(int value)
+    {
+        this.value = value;
+        price = ShopItemFactory.GetSalePrice(15, value);
+        plusCurHp = value * 30;
+
+        contentText = "Increases the player's Hp by " + plusCurHp.ToString() + " points.";
+        NameText = "Heal " + Utils.GetRomanNumber(value);
+        sprite = Resources.Load<Sprite>("Sprites/PlayerHp");
+    }
+
+    protected override void Ability()
+    {
+        GameObject.Find("Player").GetComponent<JongChan.Player>().CurHp += plusCurHp;
+    }
+}
+
+public class IncreaseMaxHp : ShopItem
+{
+    int plusMaxHp;
+
+    public IncreaseMaxHp(int value)
+    {
+        this.value = value;
+        price = ShopItemFactory.GetSalePrice(15, value);
+        plusMaxHp = value * 30;
+
+        contentText = "Increases the player's Hp by " + plusMaxHp.ToString() + " points.";
+        NameText = "Increase MaxHp " + Utils.GetRomanNumber(value);
+        sprite = Resources.Load<Sprite>("Sprites/PlayerHp");
+    }
+
+    protected override void Ability()
+    {
+        GameObject.Find("Player").GetComponent<JongChan.Player>().MaxHp += plusMaxHp;
+    }
+}
+
+public class IncreaseSpeed : ShopItem
+{
+    float plusSpeed;
+
+    public IncreaseSpeed(int value)
+    {
+        this.value = value;
+        price = ShopItemFactory.GetSalePrice(15, value);
+        plusSpeed = value * 0.5f;
+
+        contentText = "Increases the player's Hp by " + plusSpeed.ToString() + " points.";
+        NameText = "Increase Speed " + Utils.GetRomanNumber(value);
+        sprite = Resources.Load<Sprite>("Sprites/IncreaseSpeed");
+    }
+
+    protected override void Ability()
+    {
+        GameObject.Find("Player").GetComponent<JongChan.Player>().UpgradeSpeed(plusSpeed);
     }
 }

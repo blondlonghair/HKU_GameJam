@@ -1203,6 +1203,10 @@ PrefabInstance:
       value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 114769114217541614, guid: c88d180019f2d954cb75142954343e61, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e5fa6cba27f1b7a47838db200baa1556, type: 2}
+    - target: {fileID: 114769114217541614, guid: c88d180019f2d954cb75142954343e61, type: 3}
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
@@ -1214,6 +1218,10 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 65535
       objectReference: {fileID: 0}
+    - target: {fileID: 114769114217541614, guid: c88d180019f2d954cb75142954343e61, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21419154506056544, guid: e5fa6cba27f1b7a47838db200baa1556, type: 2}
     - target: {fileID: 114769114217541614, guid: c88d180019f2d954cb75142954343e61, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901

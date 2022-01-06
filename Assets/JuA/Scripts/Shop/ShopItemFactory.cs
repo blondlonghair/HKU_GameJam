@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopItemFactory
 {
-    static int maxIndex = 2;
+    static int maxIndex = 6;
     static int minValue = 1;
     static int maxValue = 5;
 
@@ -14,7 +14,10 @@ public class ShopItemFactory
         {
             case 1: return new ConstructionMaterials(value);
             case 2: return new RepairHammer(value);
-            //case 3: return new RepairHammer(value);
+            case 3: return new IncreaseDamage(value);
+            case 4: return new IncreaseCurHp(value);
+            case 5: return new IncreaseMaxHp(value);
+            case 6: return new IncreaseSpeed(value);
             default: return new ConstructionMaterials(value);
         }
     }
