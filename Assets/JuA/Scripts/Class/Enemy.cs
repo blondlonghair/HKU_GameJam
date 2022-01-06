@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     public float curHp = 100;
     public float maxHp = 100;
+    public float damage = 20;
 
     enum State
     {
@@ -24,9 +25,10 @@ public class Enemy : MonoBehaviour
         state = State.Idle;
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        
-        
+
+        transform.GetChild(0).TryGetComponent(out anim);
         JongChan.GameManager.Instance.Enemies.Add(this);
+        JongChan.GameManager.Instance.FixAction += ShipDamage;
     }
 
     float targetToDis;
@@ -47,6 +49,8 @@ public class Enemy : MonoBehaviour
         {
             UpdateAttack();
         }
+        
+        transform.rotation = Quaternion.Euler(0,0,0);
     }
 
     private void UpdateAttack()
@@ -60,7 +64,7 @@ public class Enemy : MonoBehaviour
         if (targetToDis > 2)
         {
             state = State.Run;
-            //anim.SetTrigger("Run");
+            anim.SetTrigger("Run");
         }
     }
 
@@ -72,12 +76,12 @@ public class Enemy : MonoBehaviour
         if (targetToDis <= 2)
         {
             state = State.Attack;
-            //anim.SetTrigger("Attack");
+            anim.SetTrigger("Attack");
         }
         else if (targetToDis > 15)
         {
             state = State.Idle;
-            //anim.SetTrigger("Idle");
+            anim.SetTrigger("Idle");
         }
     }
 
@@ -88,12 +92,18 @@ public class Enemy : MonoBehaviour
         if (targetToDis < 15)
         {
             state = State.Run;
-            //anim.SetTrigger("Run");
+            anim.SetTrigger("Run");
         }
     }
 
     private void OnDisable()
     {
         JongChan.GameManager.Instance.Enemies.Remove(this);
+        JongChan.GameManager.Instance.FixAction -= ShipDamage;
+    }
+    
+    private void ShipDamage(float damage)
+    {
+        JongChan.GameManager.Instance.ShipHp -= Time.deltaTime * 5;
     }
 }

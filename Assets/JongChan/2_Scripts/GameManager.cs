@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace JongChan
@@ -12,11 +13,14 @@ namespace JongChan
         public List<Stuff> FixStuffs = new List<Stuff>();
         public List<Portal> Portals = new List<Portal>();
         public List<Enemy> Enemies = new List<Enemy>();
+        public List<Transform> SpawnPoint = new List<Transform>();
 
         public event Action<float> FixAction;
 
         [SerializeField] private float _shipHp = 500;
         [SerializeField] private float _shipDamage = 1;
+        [SerializeField] private GameObject _enemy;
+        [SerializeField] private Image _hpBar;
         
         public float ShipHp
         {
@@ -33,12 +37,15 @@ namespace JongChan
 
             GameObject.FindGameObjectWithTag("Player").TryGetComponent(out _player);
 
-            StartCoroutine(Co_BreackStuff());
+            StartCoroutine(Co_BreakStuff());
+            StartCoroutine(Co_SpawnEnemy());
         }
 
         private void Update()
         {
-            FixAction?.Invoke(_shipDamage * Time.deltaTime);
+            FixAction?.Invoke(_shipDamage);
+
+            _hpBar.fillAmount = _shipHp / 500;
 
             foreach (var fixStuff in FixStuffs)
             {
@@ -96,12 +103,21 @@ namespace JongChan
             }
         }
 
-        private IEnumerator Co_BreackStuff()
+        private IEnumerator Co_BreakStuff()
         {
             while (true)
             {
                 yield return new WaitForSeconds(Random.Range(5, 10));
                 FixStuffs[Random.Range(0, FixStuffs.Count)].Break();
+            }
+        }
+
+        private IEnumerator Co_SpawnEnemy()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Random.Range(20, 25));
+                Instantiate(_enemy, SpawnPoint[Random.Range(0, SpawnPoint.Count)].position, Quaternion.identity);
             }
         }
     }

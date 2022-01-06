@@ -49,7 +49,7 @@ namespace JongChan
         
         protected virtual void ShipDamage(float damage)
         {
-            GameManager.Instance.ShipHp -= Time.deltaTime * 10;
+            GameManager.Instance.ShipHp -= Time.deltaTime * 2;
         }
     }
 }
