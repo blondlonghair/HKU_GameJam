@@ -7,11 +7,21 @@ namespace JongChan
 {
     public class ShopStuff : Stuff
     {
-        [SerializeField, Header("액션")] private UnityEvent openShop;
+        private bool _isOpen;
         
         public override void Use()
         {
-            openShop.Invoke();
+            if (!_isOpen)
+            {
+                ShopManager.Instance.LoadShop();
+                _isOpen = true;
+            }
+
+            else
+            {
+                ShopManager.Instance.ExitShop();
+                _isOpen = false;
+            }
         }
     }
 }

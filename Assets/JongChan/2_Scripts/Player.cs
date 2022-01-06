@@ -77,7 +77,9 @@ namespace JongChan
 
         public void PlayerMove(Transform targetPos)
         {
-            _controller.Move(targetPos.position - transform.position);
+            gameObject.SetActive(false);
+            transform.position = targetPos.position;
+            gameObject.SetActive(true);
         }
 
         public void UpgradeAttack(float value)
