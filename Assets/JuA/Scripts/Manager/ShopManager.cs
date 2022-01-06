@@ -20,8 +20,11 @@ public class ShopManager : Singleton<ShopManager>
         Shop.SetActive(false);
         ShopGroup.alpha = 0;
 
-        Button button = Shop.transform.Find("Buy").GetComponent<Button>();
-        button.onClick.AddListener(() => BuyAll());
+        Button Buy = Shop.transform.Find("Buy").GetComponent<Button>();
+        Buy.onClick.AddListener(() => BuyAll());
+
+        Button Exit = Shop.transform.Find("Exit").GetComponent<Button>();
+        Exit.onClick.AddListener(() => ExitShop());
     }
 
     public void LoadShop() //상점 로드

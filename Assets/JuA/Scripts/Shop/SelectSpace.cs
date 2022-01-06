@@ -53,7 +53,7 @@ public class SelectSpace : MonoBehaviour
     {
         item = shop;
         Name.text = item.NameText;
-        price.text = item.price.ToString();
+        price.text = item.price.ToString() + "$";
         content.description = item.contentText;
         image.sprite = item.sprite;
     }

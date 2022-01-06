@@ -9,11 +9,14 @@ public class UIManager : Singleton<UIManager>
 {
     private GameObject NotificationPrefab;
     private GameObject Canvas;
+    private GameObject Tooltip;
 
     private void Awake()
     {
         NotificationPrefab = Resources.Load<GameObject>("Prefabs/Notification");
         Canvas = GameObject.Find("Canvas");
+        if (GameObject.Find("Tooltip")) Tooltip = GameObject.Find("Tooltip");
+        else Tooltip = Instantiate(Resources.Load<GameObject>("Prefabs/Tooltip"), Canvas.transform);
     }
 
     public void ShowNotification(string title, string content, float time, float wait = 0.5f)

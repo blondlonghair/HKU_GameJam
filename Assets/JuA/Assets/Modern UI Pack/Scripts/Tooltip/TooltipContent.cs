@@ -29,7 +29,13 @@ namespace Michsky.UI.ModernUIPack
                     descriptionText = tooltipRect.transform.GetComponentInChildren<TextMeshProUGUI>();
                 }
 
-                catch { Debug.LogError("No Tooltip Rect assigned.", this); }
+                catch 
+                {
+                    Instantiate(Resources.Load<GameObject>("Prefabs/Tooltip"), GameObject.Find("Canvas").transform);
+                    tooltipRect = GameObject.Find("Tooltip Rect");
+                    descriptionText = tooltipRect.transform.GetComponentInChildren<TextMeshProUGUI>();
+                    //Debug.LogError("No Tooltip Rect assigned.", this); 
+                }
             }
 
             if (tooltipRect != null)
