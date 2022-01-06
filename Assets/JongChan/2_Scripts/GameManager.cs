@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace JongChan
 {
@@ -29,9 +31,9 @@ namespace JongChan
             FixStuffs.AddRange(FindObjectsOfType<Stuff>());
             Portals.AddRange(FindObjectsOfType<Portal>());
 
-            // FixStuffs.ForEach(x => x.gameObject.SetActive(false));
-            
             GameObject.FindGameObjectWithTag("Player").TryGetComponent(out _player);
+
+            StartCoroutine(Co_BreackStuff());
         }
 
         private void Update()
@@ -89,9 +91,17 @@ namespace JongChan
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         enemy.curHp -= _player.Damage;
-                        //적 공격
                     }
                 }
+            }
+        }
+
+        private IEnumerator Co_BreackStuff()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Random.Range(5, 10));
+                FixStuffs[Random.Range(0, FixStuffs.Count)].Break();
             }
         }
     }

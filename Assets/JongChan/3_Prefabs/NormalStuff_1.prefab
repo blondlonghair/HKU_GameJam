@@ -256,7 +256,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 1
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 7084649373685690245}
   - component: {fileID: 2888508467341780202}
   m_Layer: 0
-  m_Name: NormalStuff
+  m_Name: NormalStuff_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,9 +336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fKey: {fileID: 5906472831609262687}
   renderer: {fileID: 7084649373687473529}
-  light: {fileID: 0}
-  breakSprite: {fileID: 0}
-  fixedSprite: {fileID: 0}
+  light: {fileID: 108869423047352403}
+  breakSprite: {fileID: 21300000, guid: e2f13c64ed88c984dab9d711b1f82960, type: 3}
+  fixedSprite: {fileID: 21300000, guid: fde545334a341c549b5bc056fb1d05c3, type: 3}
 --- !u!1 &7084649373687473531
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7470f5733e758ea4ea7e6b90f9dbdbb2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fde545334a341c549b5bc056fb1d05c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

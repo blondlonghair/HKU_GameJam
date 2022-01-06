@@ -172,7 +172,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8254478099427185845}
   m_maskType: 0
---- !u!1 &1161169813719117325
+--- !u!1 &2640066486098274117
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,9 +180,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4348738591092329995}
-  - component: {fileID: 5016498951566779279}
-  - component: {fileID: 4251200446441269770}
+  - component: {fileID: 375410684234424633}
+  - component: {fileID: 108869423047352403}
+  - component: {fileID: 9218548626146156495}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -190,13 +190,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!4 &4348738591092329995
+--- !u!4 &375410684234424633
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161169813719117325}
+  m_GameObject: {fileID: 2640066486098274117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -205,13 +205,13 @@ Transform:
   m_Father: {fileID: 7084649373685690245}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &5016498951566779279
+--- !u!108 &108869423047352403
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161169813719117325}
+  m_GameObject: {fileID: 2640066486098274117}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
@@ -267,13 +267,13 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &4251200446441269770
+--- !u!114 &9218548626146156495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161169813719117325}
+  m_GameObject: {fileID: 2640066486098274117}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
@@ -296,9 +296,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7084649373685690245}
-  - component: {fileID: 6117665898747810074}
+  - component: {fileID: 2888508467341780202}
   m_Layer: 0
-  m_Name: ShopStuff
+  m_Name: NormalStuff_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,11 +318,11 @@ Transform:
   m_Children:
   - {fileID: 7084649373687473530}
   - {fileID: 8721302365275147188}
-  - {fileID: 4348738591092329995}
+  - {fileID: 375410684234424633}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6117665898747810074
+--- !u!114 &2888508467341780202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,14 +331,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7084649373685690362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aee9a5d7afad4d769b87df463f1ffaf9, type: 3}
+  m_Script: {fileID: 11500000, guid: 56ada30c25c640c0883c1f3027e2d380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fKey: {fileID: 5906472831609262687}
   renderer: {fileID: 7084649373687473529}
-  light: {fileID: 5016498951566779279}
-  breakSprite: {fileID: 21300000, guid: 97f7572dae6c5084badc024ee7ea9332, type: 3}
-  fixedSprite: {fileID: 21300000, guid: 7470f5733e758ea4ea7e6b90f9dbdbb2, type: 3}
+  light: {fileID: 108869423047352403}
+  breakSprite: {fileID: 21300000, guid: 6f686c2a9ec69aa46a8d2d2ca2355c99, type: 3}
+  fixedSprite: {fileID: 21300000, guid: 3c9df2b024a51884da25ef91daa93ff8, type: 3}
 --- !u!1 &7084649373687473531
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7470f5733e758ea4ea7e6b90f9dbdbb2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c9df2b024a51884da25ef91daa93ff8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
