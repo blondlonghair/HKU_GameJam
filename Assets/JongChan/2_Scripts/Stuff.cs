@@ -11,6 +11,7 @@ namespace JongChan
         [Header("Stuff 구성요소")]
         [SerializeField] protected TextMeshPro fKey;
         [SerializeField] protected SpriteRenderer renderer;
+        [SerializeField] protected Light light;
 
         [Header("스프라이트")]
         [SerializeField] protected Sprite breakSprite;
@@ -30,6 +31,7 @@ namespace JongChan
             _isBroken = false;
             renderer.sprite = fixedSprite;
             GameManager.Instance.FixAction -= ShipDamage;
+            light.color = Color.green;
         }
 
         public virtual void Break()
@@ -37,6 +39,7 @@ namespace JongChan
             _isBroken = true;
             renderer.sprite = breakSprite;
             GameManager.Instance.FixAction += ShipDamage;
+            light.color = Color.red;
         }
 
         public virtual void FKeyOn(bool isNear)

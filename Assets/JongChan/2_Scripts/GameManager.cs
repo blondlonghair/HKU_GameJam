@@ -65,7 +65,7 @@ namespace JongChan
 
             foreach (var portal in Portals)
             {
-                if (Vector3.Distance(portal.transform.position, _player.transform.position) < 3)
+                if (Vector3.Distance(portal.transform.position, _player.transform.position) < 2)
                 {
                     portal.FKeyOn(true);
                     
