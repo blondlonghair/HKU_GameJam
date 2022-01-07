@@ -51,7 +51,7 @@ public class ShopManager : Singleton<ShopManager>
         foreach(SelectSpace i in ShopList)
             if (i.IsCheck) sum += i.GetPrice();
 
-        if (sum > GameManager.Instance.GetShipStats().Gold)
+        if (sum > JongChan.GameManager.Instance.Gold)
         {
             UIManager.Instance.ShowNotification("Error!!!", "Not enough gold!", 4f);
             return;

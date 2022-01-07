@@ -55,10 +55,11 @@ public class Enemy : MonoBehaviour
 
     private void UpdateAttack()
     {
-        // if (Input.GetKeyDown(KeyCode.F)) Destroy(this.gameObject);
-        
         if (curHp <= 0)
+        {
             Destroy(gameObject);
+            JongChan.GameManager.Instance.Gold += 20;
+        }
 
         agent.speed = 0;
         if (targetToDis > 2)
@@ -104,6 +105,6 @@ public class Enemy : MonoBehaviour
     
     private void ShipDamage(float damage)
     {
-        JongChan.GameManager.Instance.ShipHp -= Time.deltaTime * 5;
+        JongChan.GameManager.Instance.ShipCurHp -= Time.deltaTime * 5;
     }
 }

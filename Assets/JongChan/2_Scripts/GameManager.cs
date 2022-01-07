@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Random = UnityEngine.Random;
 
 namespace JongChan
@@ -16,19 +17,23 @@ namespace JongChan
         public List<Transform> SpawnPoint = new List<Transform>();
 
         public event Action<float> FixAction;
+        private Player _player;
+        private float _playTime;
+        private float _spawnTime = 20;
+        private float _breakTime = 10;
+        private float _gold = 100;
 
-        [SerializeField] private float _shipHp = 500;
+        [SerializeField] private float _shipCurHp = 500;
+        [SerializeField] private float _shipMaxHp = 500;
         [SerializeField] private float _shipDamage = 1;
         [SerializeField] private GameObject _enemy;
         [SerializeField] private Image _hpBar;
+        [SerializeField] private GameObject _resultPanel;
+        [SerializeField] private TextMeshProUGUI _moneyText;
         
-        public float ShipHp
-        {
-            set => _shipHp = value;
-            get => _shipHp;
-        }
-
-        private Player _player;
+        public float ShipCurHp { set => _shipCurHp = value; get => _shipCurHp; }
+        public float ShipMaxHp { set => _shipMaxHp = value; get => _shipMaxHp; }
+        public float Gold { set => _gold = value; get => _gold; }
 
         private void Start()
         {
@@ -45,8 +50,22 @@ namespace JongChan
         {
             FixAction?.Invoke(_shipDamage);
 
-            _hpBar.fillAmount = _shipHp / 500;
+            _hpBar.fillAmount = _shipCurHp / _shipMaxHp;
+            _playTime += Time.deltaTime;
+            _gold += Time.deltaTime * 0.3f;
+            _moneyText.text = ((int)_gold).ToString();
+            
+            if (_shipCurHp <= 0)
+            {
+                Time.timeScale = 0;
+                _resultPanel.SetActive(true);
+            }
+            
+            PlayerAction();
+        }
 
+        private void PlayerAction()
+        {
             foreach (var fixStuff in FixStuffs)
             {
                 if (Vector3.Distance(fixStuff.transform.position, _player.transform.position) < 3)
@@ -107,8 +126,9 @@ namespace JongChan
         {
             while (true)
             {
-                yield return new WaitForSeconds(Random.Range(5, 10));
+                yield return new WaitForSeconds(_breakTime);
                 FixStuffs[Random.Range(0, FixStuffs.Count)].Break();
+                UIManager.Instance.ShowNotification("", "Owr spaceship is on fire", 2f);
             }
         }
 
@@ -116,8 +136,9 @@ namespace JongChan
         {
             while (true)
             {
-                yield return new WaitForSeconds(Random.Range(20, 25));
+                yield return new WaitForSeconds(_spawnTime);
                 Instantiate(_enemy, SpawnPoint[Random.Range(0, SpawnPoint.Count)].position, Quaternion.identity);
+                UIManager.Instance.ShowNotification("", "Enemy board on owr spaceship", 2f);
             }
         }
     }

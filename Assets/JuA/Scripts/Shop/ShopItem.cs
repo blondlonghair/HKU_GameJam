@@ -35,8 +35,8 @@ public class ConstructionMaterials : ShopItem
 
     protected override void Ability()
     {
-        GameManager.Instance.GetShipStats().MaxHp += plusMaxHp; //value * 10만큼 함선의 MaxCurHp 증가
-        GameManager.Instance.GetShipStats().Hp += plusMaxHp;
+        JongChan.GameManager.Instance.ShipCurHp += plusMaxHp; //value * 10만큼 함선의 MaxCurHp 증가
+        JongChan.GameManager.Instance.ShipMaxHp += plusMaxHp;
     }
 }
 
@@ -57,7 +57,15 @@ public class RepairHammer : ShopItem
 
     protected override void Ability()
     {
-        GameManager.Instance.GetShipStats().Hp += plusHp;
+        if (JongChan.GameManager.Instance.ShipCurHp + plusHp > JongChan.GameManager.Instance.ShipMaxHp)
+        {
+            JongChan.GameManager.Instance.ShipCurHp = JongChan.GameManager.Instance.ShipMaxHp;
+        }
+
+        else
+        {
+            JongChan.GameManager.Instance.ShipCurHp += plusHp;
+        }
     }
 }
 
@@ -112,7 +120,7 @@ public class IncreaseMaxHp : ShopItem
     {
         this.value = value;
         price = ShopItemFactory.GetSalePrice(15, value);
-        plusMaxHp = value * 30;
+        plusMaxHp = value * 10;
 
         contentText = "Increases the player's Hp by " + plusMaxHp.ToString() + " points.";
         NameText = "Increase MaxHp " + Utils.GetRomanNumber(value);

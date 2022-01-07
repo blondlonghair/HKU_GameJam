@@ -17,7 +17,16 @@ namespace JongChan
         private CharacterController _controller;
         private Vector3 _moveDir = Vector3.zero;
 
-        public float CurHp { get => curHp; set => curHp = value; }
+        public float CurHp
+        {
+            get => curHp;
+            set
+            {
+                if (value >= maxHp) curHp = maxHp;
+                else curHp = value;
+            }
+        }
+
         public float MaxHp { get => maxHp; set => maxHp = value; }
         public float Damage { get => damage; set => damage = value; }
 

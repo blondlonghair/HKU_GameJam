@@ -31,8 +31,8 @@ public class SelectSpace : MonoBehaviour
 
     public void Buy()
     {
-        if (GameManager.Instance.GetShipStats().Gold < item.price) return;
-        GameManager.Instance.GetShipStats().Gold -= item.price;
+        if (JongChan.GameManager.Instance.Gold < item.price) return;
+        JongChan.GameManager.Instance.Gold -= item.price;
         item.UseAbility();
         button.GetComponent<Animator>().Play("Out");
         isCheck = false;

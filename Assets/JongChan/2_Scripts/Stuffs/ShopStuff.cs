@@ -11,8 +11,10 @@ namespace JongChan
         
         public override void Use()
         {
+            
             if (!_isOpen)
             {
+                ShopManager.Instance.RandomSetSelection();
                 ShopManager.Instance.LoadShop();
                 _isOpen = true;
             }
