@@ -19,6 +19,7 @@ namespace Michsky.UI.ModernUIPack
         TooltipManager tpManager;
         [HideInInspector] public Animator tooltipAnimator;
 
+
         void Start()
         {
             if (tooltipRect == null || descriptionText == null)
@@ -31,7 +32,7 @@ namespace Michsky.UI.ModernUIPack
 
                 catch 
                 {
-                    Instantiate(Resources.Load<GameObject>("Prefabs/Tooltip"), GameObject.Find("Canvas").transform);
+                    var n = Instantiate(Resources.Load<GameObject>("Prefabs/Tooltip"), GameObject.Find("Canvas").transform);
                     tooltipRect = GameObject.Find("Tooltip Rect");
                     descriptionText = tooltipRect.transform.GetComponentInChildren<TextMeshProUGUI>();
                     //Debug.LogError("No Tooltip Rect assigned.", this); 
@@ -59,6 +60,17 @@ namespace Michsky.UI.ModernUIPack
                 tooltipAnimator.Play("In");
             else
                 StartCoroutine("ShowTooltip");
+        }
+
+        public void OnDisable()
+        {
+            if (tooltipAnimator == null) return;
+            StopCoroutine("ShowTooltip");
+
+            if (tooltipAnimator.GetCurrentAnimatorStateInfo(0).IsName("In"))
+                tooltipAnimator.Play("Out");
+
+            tpManager.allowUpdating = false;
         }
 
         public void OnPointerExit(PointerEventData eventData)

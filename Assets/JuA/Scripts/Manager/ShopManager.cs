@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class ShopManager : Singleton<ShopManager>
 {
@@ -33,10 +34,10 @@ public class ShopManager : Singleton<ShopManager>
         DOTween.To(() => ShopGroup.alpha, x => ShopGroup.alpha = x, 0.8f, 0.5f);
     }
 
-    public void ExitShop() //상점 나가기
+    public async void ExitShop() //상점 나가기
     {
-        Shop.SetActive(true);
         DOTween.To(() => ShopGroup.alpha, x => ShopGroup.alpha = x, 0, 0.5f);
+        StartCoroutine(WaitAction(() => Shop.SetActive(false), 1f));
     }
 
     public void RandomSetSelection() //상점 아이템 모두 재설정
@@ -62,5 +63,11 @@ public class ShopManager : Singleton<ShopManager>
                 if (i.IsCheck) i.Buy();
             UIManager.Instance.ShowNotification("Payment completed", "Your payment has been processed successfully.", 4f);
         }
+    }
+
+    IEnumerator WaitAction(System.Action act, float time)
+    {
+        yield return new WaitForSeconds(time);
+        act();
     }
 }

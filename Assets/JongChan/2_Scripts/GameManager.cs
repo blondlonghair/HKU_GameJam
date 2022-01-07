@@ -31,7 +31,15 @@ namespace JongChan
         [SerializeField] private GameObject _resultPanel;
         [SerializeField] private TextMeshProUGUI _moneyText;
         
-        public float ShipCurHp { set => _shipCurHp = value; get => _shipCurHp; }
+        public float ShipCurHp 
+        {
+            set
+            {
+                if (value >= _shipMaxHp) _shipCurHp = _shipMaxHp;
+                _shipCurHp = value;
+            }
+            get => _shipCurHp; 
+        }
         public float ShipMaxHp { set => _shipMaxHp = value; get => _shipMaxHp; }
         public float Gold { set => _gold = value; get => _gold; }
 
