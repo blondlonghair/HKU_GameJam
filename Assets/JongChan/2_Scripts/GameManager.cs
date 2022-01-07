@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace JongChan
@@ -21,17 +22,19 @@ namespace JongChan
         private float _playTime;
         private float _spawnTime = 20;
         private float _breakTime = 10;
-        private float _gold = 100;
+        private float _gold = 0;
 
         [SerializeField] private float _shipCurHp = 500;
         [SerializeField] private float _shipMaxHp = 500;
         [SerializeField] private float _shipDamage = 1;
         [SerializeField] private GameObject _enemy;
-        [SerializeField] private Image _hpBar;
+        [SerializeField] private Image _shipHpBar;
+        [SerializeField] private Image _playerHpBar;
         [SerializeField] private GameObject _resultPanel;
+        [SerializeField] private TextMeshProUGUI _timeText;
         [SerializeField] private TextMeshProUGUI _moneyText;
         
-        public float ShipCurHp { set => _shipCurHp = value; get => _shipCurHp; }
+        public float ShipCurHp { set => _shipCurHp = value >= _shipMaxHp ? _shipMaxHp : value; get => _shipCurHp; }
         public float ShipMaxHp { set => _shipMaxHp = value; get => _shipMaxHp; }
         public float Gold { set => _gold = value; get => _gold; }
 
@@ -50,9 +53,11 @@ namespace JongChan
         {
             FixAction?.Invoke(_shipDamage);
 
-            _hpBar.fillAmount = _shipCurHp / _shipMaxHp;
+            _shipHpBar.fillAmount = _shipCurHp / _shipMaxHp;
+            _playerHpBar.fillAmount = _player.CurHp / _player.MaxHp;
             _playTime += Time.deltaTime;
             _gold += Time.deltaTime * 0.3f;
+            _timeText.text = ((int)_playTime).ToString();
             _moneyText.text = ((int)_gold).ToString();
             
             if (_shipCurHp <= 0)
@@ -77,6 +82,7 @@ namespace JongChan
                         if (fixStuff.IsBroken)
                         {
                             fixStuff.Fix();
+                            _player.ChangeAnim("Fix");
                         }
                         else
                         {
@@ -117,6 +123,7 @@ namespace JongChan
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         enemy.curHp -= _player.Damage;
+                        _player.ChangeAnim("Attack");
                     }
                 }
             }
@@ -140,6 +147,16 @@ namespace JongChan
                 Instantiate(_enemy, SpawnPoint[Random.Range(0, SpawnPoint.Count)].position, Quaternion.identity);
                 UIManager.Instance.ShowNotification("", "Enemy board on owr spaceship", 2f);
             }
+        }
+
+        public void GoTitle()
+        {
+            SceneManager.LoadScene("Title");
+        }
+
+        public void ReStart()
+        {
+            SceneManager.LoadScene("InGame");
         }
     }
 }

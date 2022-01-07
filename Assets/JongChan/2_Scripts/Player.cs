@@ -20,11 +20,7 @@ namespace JongChan
         public float CurHp
         {
             get => curHp;
-            set
-            {
-                if (value >= maxHp) curHp = maxHp;
-                else curHp = value;
-            }
+            set => curHp = value >= maxHp ? maxHp : value; 
         }
 
         public float MaxHp { get => maxHp; set => maxHp = value; }
@@ -73,15 +69,20 @@ namespace JongChan
                 _animator.SetBool("Move", false);
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                _animator.SetTrigger("Attack");
-            }
+            // if (Input.GetMouseButtonDown(0))
+            // {
+            //     _animator.SetTrigger("Attack");
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.F))
+            // {
+            //     _animator.SetTrigger("Fix");
+            // }
+        }
 
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                _animator.SetTrigger("Fix");
-            }
+        public void ChangeAnim(string anim)
+        {
+            _animator.SetTrigger(anim);
         }
 
         public void PlayerMove(Transform targetPos)
