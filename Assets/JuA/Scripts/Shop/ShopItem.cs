@@ -57,15 +57,7 @@ public class RepairHammer : ShopItem
 
     protected override void Ability()
     {
-        if (JongChan.GameManager.Instance.ShipCurHp + plusHp > JongChan.GameManager.Instance.ShipMaxHp)
-        {
-            JongChan.GameManager.Instance.ShipCurHp = JongChan.GameManager.Instance.ShipMaxHp;
-        }
-
-        else
-        {
-            JongChan.GameManager.Instance.ShipCurHp += plusHp;
-        }
+        JongChan.GameManager.Instance.ShipCurHp += plusHp;
     }
 }
 
