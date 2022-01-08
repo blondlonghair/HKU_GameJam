@@ -34,7 +34,7 @@ public class SelectSpace : MonoBehaviour
         if (JongChan.GameManager.Instance.Gold < item.price) return;
         JongChan.GameManager.Instance.Gold -= item.price;
         item.UseAbility();
-        button.GetComponent<Animator>().Play("Out");
+        button.GetComponent<AnimatedIconHandler>().ClickEvent();
         isCheck = false;
         RandomSet();
     }
