@@ -26,19 +26,19 @@ public class Spawner : MonoBehaviour
         {
             case 1:
                 position = new Vector3(Random.Range(-590, 590), 30, 340);
-                rotation = Quaternion.Euler(90, 0, Random.Range(-150, -30));
+                rotation = Quaternion.Euler(0, Random.Range(-150, -30), 0);
                 break;
             case 2:
                 position = new Vector3(Random.Range(-590, 590), 30, -340);
-                rotation = Quaternion.Euler(90, 0, Random.Range(30, 150));
+                rotation = Quaternion.Euler(0, Random.Range(30, 150), 0);
                 break;
             case 3:
                 position = new Vector3(-590, 30, Random.Range(-340, 340));
-                rotation = Quaternion.Euler(90, 0, Random.Range(-60, 60));
+                rotation = Quaternion.Euler(0, Random.Range(-60, 60), 0);
                 break;
             case 4:
                 position = new Vector3(590, 30, Random.Range(-340, 340));
-                rotation = Quaternion.Euler(90, 0, Random.Range(-240, -120));
+                rotation = Quaternion.Euler(0, Random.Range(-240, -120), 0);
                 break;
         }
 
