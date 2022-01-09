@@ -70,16 +70,6 @@ namespace JongChan
             {
                 _animator.SetBool("Move", false);
             }
-
-            // if (Input.GetMouseButtonDown(0))
-            // {
-            //     _animator.SetTrigger("Attack");
-            // }
-            //
-            // if (Input.GetKeyDown(KeyCode.F))
-            // {
-            //     _animator.SetTrigger("Fix");
-            // }
         }
 
         public void ChangeAnim(string anim)

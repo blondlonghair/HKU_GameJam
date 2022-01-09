@@ -21,8 +21,9 @@ public class MyShip : MonoBehaviour
             if (Input.GetKey(KeyCode.Z) || Input.GetKeyDown(KeyCode.Z))
             {
                 Instantiate(bullet, transform.position, Quaternion.Euler(90, 0, z));
+                SoundManager.Instance.PlaySFXSound("ShipShoot");
+                curtime = coolTime;
             }
-            curtime = coolTime;
         }
         curtime -= Time.deltaTime;
     }

@@ -23,6 +23,7 @@ public class Asteroid : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("MyShip"))
         {
+            JongChan.GameManager.Instance.BreakStuff();
             JongChan.GameManager.Instance.ShipCurHp -= damage;
             Destroy(gameObject);
         }

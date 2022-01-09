@@ -48,6 +48,7 @@ public class EnemyShip : MonoBehaviour
             if (curtime <= 0)
             {
                 if (Random.Range(0,2) == 0) JongChan.GameManager.Instance.SpawnEnemy();
+                else { JongChan.GameManager.Instance.BreakStuff(); }
                 curtime = cool;
             }
         }

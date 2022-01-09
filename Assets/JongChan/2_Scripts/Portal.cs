@@ -32,6 +32,7 @@ namespace JongChan
         public void Use(Player player, Portal targetPortal)
         {
             player.PlayerMove(targetPortal.transform);
+            SoundManager.Instance.PlaySFXSound("Portal");
         }
     }
 }

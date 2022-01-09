@@ -48,8 +48,8 @@ namespace JongChan
 
             GameObject.FindGameObjectWithTag("Player").TryGetComponent(out _player);
 
-            StartCoroutine(Co_BreakStuff());
-            StartCoroutine(Co_SpawnEnemy());
+            // StartCoroutine(Co_BreakStuff());
+            // StartCoroutine(Co_SpawnEnemy());
         }
 
         private void Update()
@@ -63,7 +63,7 @@ namespace JongChan
             _timeText.text = ((int)_playTime).ToString();
             _moneyText.text = ((int)_gold).ToString();
             
-            if (_shipCurHp <= 0)
+            if (_shipCurHp <= 0 || _player.CurHp <= 0)
             {
                 Time.timeScale = 0;
                 _resultPanel.SetActive(true);
@@ -128,6 +128,7 @@ namespace JongChan
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         enemy.curHp -= _player.Damage;
+                        SoundManager.Instance.PlaySFXSound("Hit");
                         _player.ChangeAnim("Attack");
                     }
                 }
@@ -140,7 +141,7 @@ namespace JongChan
             {
                 yield return new WaitForSeconds(_breakTime);
                 FixStuffs[Random.Range(0, FixStuffs.Count)].Break();
-                UIManager.Instance.ShowNotification("", "Owr spaceship is on fire", 2f);
+                (FixStuffs.Find(x => x is AIStuff) as AIStuff)?.LeaveMessage(true);
             }
         }
 
@@ -150,14 +151,20 @@ namespace JongChan
             {
                 yield return new WaitForSeconds(_spawnTime);
                 Instantiate(_enemy, SpawnPoint[Random.Range(0, SpawnPoint.Count)].position, Quaternion.identity);
-                UIManager.Instance.ShowNotification("", "Enemy board on owr spaceship", 2f);
+                (FixStuffs.Find(x => x is AIStuff) as AIStuff)?.LeaveMessage(false);
             }
         }
         
         public void SpawnEnemy()
         {
             Instantiate(_enemy, SpawnPoint[Random.Range(0, SpawnPoint.Count)].position, Quaternion.identity);
-            UIManager.Instance.ShowNotification("", "Enemy board on owr spaceship", 2f);
+            (FixStuffs.Find(x => x is AIStuff) as AIStuff)?.LeaveMessage(false);
+        }
+
+        public void BreakStuff()
+        {
+            FixStuffs[Random.Range(0, FixStuffs.Count)].Break();
+            (FixStuffs.Find(x => x is AIStuff) as AIStuff)?.LeaveMessage(true);
         }
 
         public void GoTitle()
