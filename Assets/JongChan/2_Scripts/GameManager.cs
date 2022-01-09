@@ -153,6 +153,12 @@ namespace JongChan
                 UIManager.Instance.ShowNotification("", "Enemy board on owr spaceship", 2f);
             }
         }
+        
+        public void SpawnEnemy()
+        {
+            Instantiate(_enemy, SpawnPoint[Random.Range(0, SpawnPoint.Count)].position, Quaternion.identity);
+            UIManager.Instance.ShowNotification("", "Enemy board on owr spaceship", 2f);
+        }
 
         public void GoTitle()
         {

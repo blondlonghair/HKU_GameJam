@@ -19,7 +19,7 @@ public class CameraManager : Singleton<CameraManager>
 
         camPosOne.SetActive(true);
         camPosTwo.SetActive(false);
-        subCamera.SetActive(false);
+        subCamera.SetActive(true);
 
         ViewType = ViewType.Charater;
     }

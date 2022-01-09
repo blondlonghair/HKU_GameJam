@@ -125,10 +125,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7021521521310505907}
+  - component: {fileID: 7021521521310505905}
   - component: {fileID: 7021521521310505916}
   - component: {fileID: 7021521521310505906}
   - component: {fileID: 3569914685469669701}
-  - component: {fileID: 7021521521310505905}
   m_Layer: 0
   m_Name: MyShip
   m_TagString: MyShip
@@ -152,6 +152,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &7021521521310505905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7021521521310505917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ecedb54cf1192458c645893140f1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 8143188126369639882, guid: 4a33d32fb62997541b14c33d175c3e42, type: 3}
+  Arrow: {fileID: 1871986598392795759}
+  coolTime: 0.7
 --- !u!212 &7021521521310505916
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -233,18 +248,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &7021521521310505905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7021521521310505917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ecedb54cf1192458c645893140f1b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 8143188126369639882, guid: 4a33d32fb62997541b14c33d175c3e42, type: 3}
-  Arrow: {fileID: 1871986598392795759}
-  coolTime: 1
