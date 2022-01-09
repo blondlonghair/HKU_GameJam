@@ -38,6 +38,9 @@ namespace JongChan
         public float ShipMaxHp { set => _shipMaxHp = value; get => _shipMaxHp; }
         public float Gold { set => _gold = value; get => _gold; }
 
+        private bool playerCanAction = true;
+        public bool PlayerCanAction { set => playerCanAction = value; get => playerCanAction; }
+
         private void Start()
         {
             FixStuffs.AddRange(FindObjectsOfType<Stuff>());
@@ -71,6 +74,8 @@ namespace JongChan
 
         private void PlayerAction()
         {
+            if (!PlayerCanAction) return;
+
             foreach (var fixStuff in FixStuffs)
             {
                 if (Vector3.Distance(fixStuff.transform.position, _player.transform.position) < 3)
