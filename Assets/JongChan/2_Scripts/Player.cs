@@ -34,6 +34,8 @@ namespace JongChan
 
         void Update()
         {
+            if (!GameManager.Instance.PlayerCanAction) return;
+
             if (_controller.isGrounded)
             {
                 float h = Input.GetAxisRaw("Horizontal");

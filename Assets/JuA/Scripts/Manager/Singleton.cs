@@ -9,12 +9,18 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             if (instance == null)
             {
-                var obj = new GameObject("[ " + typeof(T).Name + " ]");
+                var obj = GameObject.Find("[ " + typeof(T).Name + " ]");
+                if (obj == null) obj = new GameObject("[ " + typeof(T).Name + " ]");
                 DontDestroyOnLoad(obj);
                 instance = obj.AddComponent<T>();
             }
 
             return instance;
         }
+    }
+
+    protected virtual void OnDestroy()
+    {
+        instance = null;
     }
 }
